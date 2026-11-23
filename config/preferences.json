@@ -1,0 +1,72 @@
+{
+  "user_profile": {
+    "name": "Usuario Podcast Radar",
+    "description": "Perfil de preferencias temáticas para descubrimiento y afinidad semántica"
+  },
+  "seed_channels": [
+    {
+      "name": "Monos Estocásticos",
+      "channel_id": "monos-estocasticos",
+      "default_theme": "Inteligencia Artificial",
+      "search_query": "Monos Estocasticos podcast completo",
+      "description": "Podcast de referencia sobre IA y tecnología en español conducido por Antonio Ortiz y Matías S. Zavia"
+    },
+    {
+      "name": "The Wild Project",
+      "channel_id": "the-wild-project",
+      "default_theme": "Ciencia & Salud",
+      "search_query": "The Wild Project podcast completo ciencia tecnologia",
+      "description": "Entrevistas en profundidad en español con científicos, filósofos y divulgadores"
+    },
+    {
+      "name": "Lex Fridman Podcast",
+      "channel_id": "lex-fridman",
+      "default_theme": "Inteligencia Artificial",
+      "search_query": "Lex Fridman Podcast AI science",
+      "description": "Conversaciones internacionales de largo formato con traducción al español en el resumen"
+    },
+    {
+      "name": "Huberman Lab",
+      "channel_id": "huberman-lab",
+      "default_theme": "Ciencia & Salud",
+      "search_query": "Huberman Lab podcast full episode",
+      "description": "Neurobiología aplicada, salud y modelos cognitivos de alto rigor"
+    },
+    {
+      "name": "Itnig Podcast",
+      "channel_id": "itnig",
+      "default_theme": "Negocios & Startups",
+      "search_query": "Itnig Podcast startups negocios",
+      "description": "Podcast referente sobre emprendimiento, tecnología y negocios en español"
+    }
+  ],
+  "similarity_queries": [
+    {
+      "theme": "Inteligencia Artificial",
+      "query": "podcast inteligencia artificial español completo",
+      "keywords": ["LLMs", "Claude", "OpenAI", "AGI", "Machine Learning", "Transformers"]
+    },
+    {
+      "theme": "Negocios & Startups",
+      "query": "podcast startups negocios tecnologia español",
+      "keywords": ["Venture Capital", "SaaS", "Crecimiento", "Modelos de Negocio", "Fundadores"]
+    },
+    {
+      "theme": "Ciencia & Salud",
+      "query": "podcast neurociencia salud longevidad español",
+      "keywords": ["Neuroplasticidad", "Dopamina", "Foco", "Biología", "Optimización"]
+    },
+    {
+      "theme": "Filosofía & Modelos Mentales",
+      "query": "podcast modelos mentales filosofia toma de decisiones español",
+      "keywords": ["Estoicismo", "Pensamiento Crítico", "Heurísticas", "Racionalidad"]
+    }
+  ],
+  "editorial_rules": {
+    "min_duration_seconds": 900,
+    "max_summary_words": 70,
+    "require_spanish_summary": true,
+    "enforce_anticlickbait": true,
+    "weekly_lookback_days": 7
+  }
+}

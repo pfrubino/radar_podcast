@@ -1,0 +1,38 @@
+[
+  {
+    "id": "ep-monos-claude",
+    "title": "¡INCREÍBLE! Claude Fable y el oscuro secreto de Nvidia que nadie te contó",
+    "channel": "Monos Estocásticos",
+    "theme": "Inteligencia Artificial",
+    "duration": "75:15",
+    "duration_seconds": 4515,
+    "summary": "En este impactante episodio que no te puedes perder por nada del mundo, Antonio y Matías destapan absolutamente todo sobre el nuevo modelo Claude Fable y debaten en profundidad si los chips de Nvidia van a colapsar o si Jensen Huang sigue siendo el rey absoluto indiscutido de Silicon Valley. Además nos revelan secretos no revelados de cómo probar modelos locales y por qué todo lo que creías saber sobre inteligencia artificial generativa cambiará para siempre en los próximos meses sin lugar a dudas.",
+    "url": "https://www.youtube.com/watch?v=0G-qXQEuwzw",
+    "thumbnail": "https://i.ytimg.com/vi/0G-qXQEuwzw/hqdefault.jpg",
+    "published_at": "2024-03-12"
+  },
+  {
+    "id": "ep-lex-karpathy",
+    "title": "Andrej Karpathy: Tesla AI, Self-Driving, Optimus, Aliens, and AGI | Lex Fridman Podcast #333",
+    "channel": "Lex Fridman Podcast",
+    "theme": "Tecnología General",
+    "duration": "3h 28m",
+    "duration_seconds": 12527,
+    "summary": "Andrej Karpathy talks about Tesla Autopilot, neural networks, computer vision architecture, transformers, and why humanoid robotics like Optimus will revolutionize the global economy before full AGI emerges.",
+    "url": "https://www.youtube.com/watch?v=cdiD-9MMpb0",
+    "thumbnail": "https://i.ytimg.com/vi/cdiD-9MMpb0/hqdefault.jpg",
+    "published_at": "2023-10-30"
+  },
+  {
+    "id": "ep-short-clip",
+    "title": "Clip Viral: El Secreto del Éxito de los Modelos de Lenguaje",
+    "channel": "Tech Clips Daily",
+    "theme": "Inteligencia Artificial",
+    "duration": "3 min",
+    "duration_seconds": 213,
+    "summary": "Un extracto rápido y dinámico de 3 minutos donde se explica el concepto más importante sobre el entrenamiento con retroalimentación humana.",
+    "url": "https://www.youtube.com/watch?v=dQw4w9WgXcQ",
+    "thumbnail": "https://i.ytimg.com/vi/dQw4w9WgXcQ/hqdefault.jpg",
+    "published_at": "2024-02-15"
+  }
+]

@@ -1,0 +1,199 @@
+<!DOCTYPE html>
+<html lang="es" class="dark">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+  <title>Podcast Radar - Curaduría Rápida</title>
+  
+  <!-- Tailwind CSS CDN -->
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script>
+    tailwind.config = {
+      darkMode: 'class',
+      theme: {
+        extend: {
+          colors: {
+            radar: {
+              400: '#34d399',
+              500: '#10b981',
+            }
+          },
+          fontFamily: {
+            sans: ['Inter', 'system-ui', '-apple-system', 'sans-serif'],
+          }
+        }
+      }
+    }
+  </script>
+  
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <script src="https://unpkg.com/lucide@latest"></script>
+
+  <style>
+    body {
+      -webkit-tap-highlight-color: transparent;
+      font-family: 'Inter', system-ui, sans-serif;
+    }
+    .no-scrollbar::-webkit-scrollbar {
+      display: none;
+    }
+    .no-scrollbar {
+      -ms-overflow-style: none;
+      scrollbar-width: none;
+    }
+    .touch-target {
+      min-height: 40px;
+    }
+  </style>
+</head>
+<body class="bg-slate-950 text-slate-100 min-h-screen flex flex-col justify-between selection:bg-emerald-500 selection:text-black">
+
+  <!-- Header Compacto -->
+  <header class="sticky top-0 z-40 bg-slate-950/95 backdrop-blur border-b border-slate-800/80 px-4 py-2.5">
+    <div class="max-w-xl mx-auto flex items-center justify-between">
+      <div class="flex items-center gap-2">
+        <span class="w-2 h-2 rounded-full bg-emerald-400 animate-pulse"></span>
+        <h1 class="font-bold text-sm tracking-tight text-white flex items-center gap-1.5">
+          Podcast Radar
+          <span class="text-[10px] text-slate-400 font-normal">| Lectura Rápida</span>
+        </h1>
+      </div>
+
+      <!-- Botón Ver Vistos -->
+      <button id="toggle-view-btn" onclick="toggleViewMode()" class="px-2.5 py-1 text-xs rounded-lg bg-slate-900 hover:bg-slate-800 text-slate-300 border border-slate-800 flex items-center gap-1.5 transition-colors">
+        <i data-lucide="eye" id="toggle-icon" class="w-3.5 h-3.5 text-slate-400"></i>
+        <span id="toggle-label">Vistos</span>
+        <span id="seen-count-badge" class="px-1.5 py-0.2 rounded text-[10px] bg-slate-800 text-emerald-400 font-semibold">0</span>
+      </button>
+    </div>
+
+    <!-- Navegación Principal: Feed vs Por Canales -->
+    <div class="max-w-xl mx-auto mt-2 grid grid-cols-2 gap-1 bg-slate-900 p-1 rounded-xl border border-slate-800/80">
+      <button id="nav-tab-feed" onclick="switchNavSection('feed')" class="py-1.5 text-xs font-semibold rounded-lg bg-slate-800 text-white shadow-sm flex items-center justify-center gap-1.5 transition-all">
+        <i data-lucide="zap" class="w-3.5 h-3.5 text-emerald-400"></i>
+        <span>Feed Reciente</span>
+        <span id="total-feed-count" class="text-[10px] text-slate-400 font-normal">(13)</span>
+      </button>
+      <button id="nav-tab-channels" onclick="switchNavSection('channels')" class="py-1.5 text-xs font-medium rounded-lg text-slate-400 hover:text-slate-200 flex items-center justify-center gap-1.5 transition-all">
+        <i data-lucide="tv" class="w-3.5 h-3.5 text-slate-400"></i>
+        <span>Por Canal</span>
+        <span id="total-channels-count" class="text-[10px] text-slate-400 font-normal">(7)</span>
+      </button>
+    </div>
+
+    <!-- Subbarra de Búsqueda y Filtros de Tema (Visible en modo Feed) -->
+    <div id="feed-controls" class="max-w-xl mx-auto mt-2 space-y-2">
+      <div class="relative">
+        <i data-lucide="search" class="w-3.5 h-3.5 absolute left-3 top-2.5 text-slate-500"></i>
+        <input 
+          id="search-input" 
+          type="search" 
+          placeholder="Buscar por tema, canal o concepto..." 
+          class="w-full pl-8 pr-7 py-1.5 bg-slate-900 border border-slate-800/80 rounded-lg text-xs text-white placeholder-slate-500 focus:outline-none focus:border-emerald-500"
+          oninput="handleSearch(this.value)"
+        >
+        <button id="clear-search" onclick="clearSearch()" class="hidden absolute right-2.5 top-2 text-slate-500 hover:text-slate-300">
+          <i data-lucide="x" class="w-3.5 h-3.5"></i>
+        </button>
+      </div>
+
+      <!-- Chips de Temas -->
+      <div class="overflow-x-auto no-scrollbar flex items-center gap-1.5 pb-0.5">
+        <button onclick="selectTheme('all')" data-theme="all" class="theme-chip px-2.5 py-1 rounded-md text-xs font-medium shrink-0 bg-emerald-500 text-slate-950 font-semibold">
+          Todos
+        </button>
+        <button onclick="selectTheme('Inteligencia Artificial')" data-theme="Inteligencia Artificial" class="theme-chip px-2.5 py-1 rounded-md text-xs font-medium shrink-0 bg-slate-900 text-slate-300 border border-slate-800 hover:bg-slate-800">
+          IA (Últimos 2 meses)
+        </button>
+        <button onclick="selectTheme('Ciencia & Salud')" data-theme="Ciencia & Salud" class="theme-chip px-2.5 py-1 rounded-md text-xs font-medium shrink-0 bg-slate-900 text-slate-300 border border-slate-800 hover:bg-slate-800">
+          Ciencia & Salud
+        </button>
+        <button onclick="selectTheme('Negocios & Startups')" data-theme="Negocios & Startups" class="theme-chip px-2.5 py-1 rounded-md text-xs font-medium shrink-0 bg-slate-900 text-slate-300 border border-slate-800 hover:bg-slate-800">
+          Negocios
+        </button>
+        <button onclick="selectTheme('Filosofía & Modelos Mentales')" data-theme="Filosofía & Modelos Mentales" class="theme-chip px-2.5 py-1 rounded-md text-xs font-medium shrink-0 bg-slate-900 text-slate-300 border border-slate-800 hover:bg-slate-800">
+          Filosofía
+        </button>
+      </div>
+    </div>
+  </header>
+
+  <!-- Contenedor Principal -->
+  <main class="flex-1 max-w-xl w-full mx-auto px-4 py-3 space-y-3">
+    <!-- Banner de Vista de Vistos -->
+    <div id="view-banner" class="hidden items-center justify-between bg-slate-900 border border-slate-800 px-3 py-2 rounded-lg text-xs text-slate-400">
+      <span class="flex items-center gap-1.5">
+        <i data-lucide="archive" class="w-3.5 h-3.5 text-emerald-400"></i>
+        Viendo episodios archivados
+      </span>
+      <button onclick="toggleViewMode()" class="text-emerald-400 hover:underline font-medium text-[11px]">Volver</button>
+    </div>
+
+    <!-- SECCIÓN 1: FEED DE EPISODIOS (Ultra compacto, sin imagen, lectura directa) -->
+    <section id="feed-section" class="space-y-3">
+      <div id="podcasts-container" class="space-y-2.5">
+        <!-- Renderizado dinámico -->
+      </div>
+    </section>
+
+    <!-- SECCIÓN 2: POR CANAL (Explorador y filtro por canal) -->
+    <section id="channels-section" class="hidden space-y-3">
+      <div class="flex items-center justify-between pb-1">
+        <h2 class="text-xs font-semibold text-slate-300 uppercase tracking-wider flex items-center gap-1.5">
+          <i data-lucide="folder" class="w-3.5 h-3.5 text-emerald-400"></i>
+          Explorar Canales
+        </h2>
+        <span class="text-[11px] text-slate-500" id="channels-count-label">7 canales disponibles</span>
+      </div>
+
+      <!-- Tarjetas de Canales -->
+      <div id="channels-grid" class="grid grid-cols-1 sm:grid-cols-2 gap-2">
+        <!-- Renderizado dinámico de canales -->
+      </div>
+
+      <!-- Contenedor de episodios del canal seleccionado -->
+      <div id="channel-episodes-container" class="hidden pt-3 border-t border-slate-800/80 space-y-2.5">
+        <div class="flex items-center justify-between">
+          <h3 id="selected-channel-title" class="text-sm font-bold text-white flex items-center gap-2">
+            <!-- Título canal -->
+          </h3>
+          <button onclick="closeChannelDetail()" class="text-xs text-slate-400 hover:text-white flex items-center gap-1">
+            <i data-lucide="chevron-up" class="w-3.5 h-3.5"></i>
+            Cerrar canal
+          </button>
+        </div>
+        <div id="channel-episodes-list" class="space-y-2.5">
+          <!-- Episodios específicos de este canal -->
+        </div>
+      </div>
+    </section>
+
+    <!-- Empty State -->
+    <div id="empty-state" class="hidden text-center py-10 px-4 space-y-2">
+      <i data-lucide="inbox" class="w-8 h-8 mx-auto text-slate-600"></i>
+      <h3 class="text-xs font-semibold text-slate-300">No hay episodios para mostrar</h3>
+      <p id="empty-state-desc" class="text-xs text-slate-500 max-w-xs mx-auto">
+        Prueba restableciendo los filtros o cambia de sección.
+      </p>
+      <button onclick="resetFilters()" class="px-3 py-1.5 text-xs rounded-lg bg-slate-900 border border-slate-800 text-slate-300 hover:bg-slate-800">
+        Restablecer
+      </button>
+    </div>
+  </main>
+
+  <!-- Footer Fijo Mínimo -->
+  <footer class="sticky bottom-0 z-30 bg-slate-950/95 backdrop-blur border-t border-slate-800/80 px-4 py-2 text-[11px] text-slate-400">
+    <div class="max-w-xl mx-auto flex items-center justify-between">
+      <span class="flex items-center gap-1.5">
+        <span class="w-1.5 h-1.5 rounded-full bg-emerald-400"></span>
+        <span id="footer-summary-status">13 episodios disponibles</span>
+      </span>
+      <span id="footer-seen-stats" class="text-slate-500">0 vistos</span>
+    </div>
+  </footer>
+
+  <script src="app.js"></script>
+</body>
+</html>
