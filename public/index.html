@@ -51,69 +51,69 @@
 <body class="bg-slate-950 text-slate-100 min-h-screen flex flex-col justify-between selection:bg-emerald-500 selection:text-black">
 
   <!-- Header Compacto -->
-  <header class="sticky top-0 z-40 bg-slate-950/95 backdrop-blur border-b border-slate-800/80 px-4 py-2.5">
+  <header class="sticky top-0 z-40 bg-slate-950/95 backdrop-blur border-b border-slate-800/80 px-4 py-3">
     <div class="max-w-xl mx-auto flex items-center justify-between">
-      <div class="flex items-center gap-2">
-        <span class="w-2 h-2 rounded-full bg-emerald-400 animate-pulse"></span>
-        <h1 class="font-bold text-sm tracking-tight text-white flex items-center gap-1.5">
+      <div class="flex items-center gap-2.5">
+        <span class="w-2.5 h-2.5 rounded-full bg-emerald-400 animate-pulse"></span>
+        <h1 class="font-extrabold text-base tracking-tight text-white flex items-center gap-2">
           Podcast Radar
-          <span class="text-[10px] text-slate-400 font-normal">| Lectura Rápida</span>
+          <span class="text-xs text-slate-400 font-normal">| Lectura Rápida</span>
         </h1>
       </div>
 
       <!-- Botón Ver Vistos -->
-      <button id="toggle-view-btn" onclick="toggleViewMode()" class="px-2.5 py-1 text-xs rounded-lg bg-slate-900 hover:bg-slate-800 text-slate-300 border border-slate-800 flex items-center gap-1.5 transition-colors">
-        <i data-lucide="eye" id="toggle-icon" class="w-3.5 h-3.5 text-slate-400"></i>
+      <button id="toggle-view-btn" onclick="toggleViewMode()" class="px-3 py-1.5 text-xs font-semibold rounded-lg bg-slate-900 hover:bg-slate-800 text-slate-300 border border-slate-800 flex items-center gap-1.5 transition-colors">
+        <i data-lucide="eye" id="toggle-icon" class="w-4 h-4 text-slate-400"></i>
         <span id="toggle-label">Vistos</span>
-        <span id="seen-count-badge" class="px-1.5 py-0.2 rounded text-[10px] bg-slate-800 text-emerald-400 font-semibold">0</span>
+        <span id="seen-count-badge" class="px-2 py-0.5 rounded text-xs bg-slate-800 text-emerald-400 font-bold">0</span>
       </button>
     </div>
 
     <!-- Navegación Principal: Feed vs Por Canales -->
-    <div class="max-w-xl mx-auto mt-2 grid grid-cols-2 gap-1 bg-slate-900 p-1 rounded-xl border border-slate-800/80">
-      <button id="nav-tab-feed" onclick="switchNavSection('feed')" class="py-1.5 text-xs font-semibold rounded-lg bg-slate-800 text-white shadow-sm flex items-center justify-center gap-1.5 transition-all">
-        <i data-lucide="zap" class="w-3.5 h-3.5 text-emerald-400"></i>
+    <div class="max-w-xl mx-auto mt-2.5 grid grid-cols-2 gap-1.5 bg-slate-900 p-1 rounded-xl border border-slate-800/80">
+      <button id="nav-tab-feed" onclick="switchNavSection('feed')" class="py-2 text-sm font-bold rounded-lg bg-slate-800 text-white shadow-sm flex items-center justify-center gap-2 transition-all">
+        <i data-lucide="zap" class="w-4 h-4 text-emerald-400"></i>
         <span>Feed Reciente</span>
-        <span id="total-feed-count" class="text-[10px] text-slate-400 font-normal">(13)</span>
+        <span id="total-feed-count" class="text-xs text-slate-400 font-normal">(13)</span>
       </button>
-      <button id="nav-tab-channels" onclick="switchNavSection('channels')" class="py-1.5 text-xs font-medium rounded-lg text-slate-400 hover:text-slate-200 flex items-center justify-center gap-1.5 transition-all">
-        <i data-lucide="tv" class="w-3.5 h-3.5 text-slate-400"></i>
+      <button id="nav-tab-channels" onclick="switchNavSection('channels')" class="py-2 text-sm font-semibold rounded-lg text-slate-400 hover:text-slate-200 flex items-center justify-center gap-2 transition-all">
+        <i data-lucide="tv" class="w-4 h-4 text-slate-400"></i>
         <span>Por Canal</span>
-        <span id="total-channels-count" class="text-[10px] text-slate-400 font-normal">(7)</span>
+        <span id="total-channels-count" class="text-xs text-slate-400 font-normal">(7)</span>
       </button>
     </div>
 
     <!-- Subbarra de Búsqueda y Filtros de Tema (Visible en modo Feed) -->
-    <div id="feed-controls" class="max-w-xl mx-auto mt-2 space-y-2">
+    <div id="feed-controls" class="max-w-xl mx-auto mt-2.5 space-y-2.5">
       <div class="relative">
-        <i data-lucide="search" class="w-3.5 h-3.5 absolute left-3 top-2.5 text-slate-500"></i>
+        <i data-lucide="search" class="w-4 h-4 absolute left-3 top-2.5 text-slate-500"></i>
         <input 
           id="search-input" 
           type="search" 
           placeholder="Buscar por tema, canal o concepto..." 
-          class="w-full pl-8 pr-7 py-1.5 bg-slate-900 border border-slate-800/80 rounded-lg text-xs text-white placeholder-slate-500 focus:outline-none focus:border-emerald-500"
+          class="w-full pl-9 pr-8 py-2 bg-slate-900 border border-slate-800/80 rounded-lg text-sm text-white placeholder-slate-500 focus:outline-none focus:border-emerald-500"
           oninput="handleSearch(this.value)"
         >
-        <button id="clear-search" onclick="clearSearch()" class="hidden absolute right-2.5 top-2 text-slate-500 hover:text-slate-300">
-          <i data-lucide="x" class="w-3.5 h-3.5"></i>
+        <button id="clear-search" onclick="clearSearch()" class="hidden absolute right-3 top-2.5 text-slate-500 hover:text-slate-300">
+          <i data-lucide="x" class="w-4 h-4"></i>
         </button>
       </div>
 
       <!-- Chips de Temas -->
-      <div class="overflow-x-auto no-scrollbar flex items-center gap-1.5 pb-0.5">
-        <button onclick="selectTheme('all')" data-theme="all" class="theme-chip px-2.5 py-1 rounded-md text-xs font-medium shrink-0 bg-emerald-500 text-slate-950 font-semibold">
+      <div class="overflow-x-auto no-scrollbar flex items-center gap-2 pb-1">
+        <button onclick="selectTheme('all')" data-theme="all" class="theme-chip px-3 py-1.5 rounded-lg text-xs font-bold shrink-0 bg-emerald-500 text-slate-950">
           Todos
         </button>
-        <button onclick="selectTheme('Inteligencia Artificial')" data-theme="Inteligencia Artificial" class="theme-chip px-2.5 py-1 rounded-md text-xs font-medium shrink-0 bg-slate-900 text-slate-300 border border-slate-800 hover:bg-slate-800">
+        <button onclick="selectTheme('Inteligencia Artificial')" data-theme="Inteligencia Artificial" class="theme-chip px-3 py-1.5 rounded-lg text-xs font-semibold shrink-0 bg-slate-900 text-slate-300 border border-slate-800 hover:bg-slate-800">
           IA (Últimos 2 meses)
         </button>
-        <button onclick="selectTheme('Ciencia & Salud')" data-theme="Ciencia & Salud" class="theme-chip px-2.5 py-1 rounded-md text-xs font-medium shrink-0 bg-slate-900 text-slate-300 border border-slate-800 hover:bg-slate-800">
+        <button onclick="selectTheme('Ciencia & Salud')" data-theme="Ciencia & Salud" class="theme-chip px-3 py-1.5 rounded-lg text-xs font-semibold shrink-0 bg-slate-900 text-slate-300 border border-slate-800 hover:bg-slate-800">
           Ciencia & Salud
         </button>
-        <button onclick="selectTheme('Negocios & Startups')" data-theme="Negocios & Startups" class="theme-chip px-2.5 py-1 rounded-md text-xs font-medium shrink-0 bg-slate-900 text-slate-300 border border-slate-800 hover:bg-slate-800">
+        <button onclick="selectTheme('Negocios & Startups')" data-theme="Negocios & Startups" class="theme-chip px-3 py-1.5 rounded-lg text-xs font-semibold shrink-0 bg-slate-900 text-slate-300 border border-slate-800 hover:bg-slate-800">
           Negocios
         </button>
-        <button onclick="selectTheme('Filosofía & Modelos Mentales')" data-theme="Filosofía & Modelos Mentales" class="theme-chip px-2.5 py-1 rounded-md text-xs font-medium shrink-0 bg-slate-900 text-slate-300 border border-slate-800 hover:bg-slate-800">
+        <button onclick="selectTheme('Filosofía & Modelos Mentales')" data-theme="Filosofía & Modelos Mentales" class="theme-chip px-3 py-1.5 rounded-lg text-xs font-semibold shrink-0 bg-slate-900 text-slate-300 border border-slate-800 hover:bg-slate-800">
           Filosofía
         </button>
       </div>

@@ -168,81 +168,81 @@ function renderCard(podcast) {
   const isSeen = seenIds.has(podcast.id);
   
   // Categoría compacta
-  let themeBadge = 'bg-slate-800/80 text-slate-300 border-slate-700/80';
+  let themeBadge = 'bg-slate-800 text-slate-300 border-slate-700';
   if (podcast.theme.includes('Inteligencia')) {
-    themeBadge = 'bg-purple-950/40 text-purple-300 border-purple-800/40';
+    themeBadge = 'bg-purple-950/60 text-purple-200 border-purple-700/60';
   } else if (podcast.theme.includes('Ciencia')) {
-    themeBadge = 'bg-cyan-950/40 text-cyan-300 border-cyan-800/40';
+    themeBadge = 'bg-cyan-950/60 text-cyan-200 border-cyan-700/60';
   } else if (podcast.theme.includes('Negocios')) {
-    themeBadge = 'bg-amber-950/40 text-amber-300 border-amber-800/40';
+    themeBadge = 'bg-amber-950/60 text-amber-200 border-amber-700/60';
   }
 
   return `
-    <article id="card-${podcast.id}" class="bg-slate-900 border border-slate-800/90 rounded-xl p-3.5 space-y-2.5 transition-all hover:border-slate-700">
+    <article id="card-${podcast.id}" class="bg-slate-900 border border-slate-800/90 rounded-2xl p-4 space-y-3 transition-all hover:border-slate-700 shadow-sm">
       <!-- Fila Superior: Canal (Clickeable), Duración, Categoría y Fecha -->
-      <div class="flex items-center justify-between gap-2 text-[11px] flex-wrap">
-        <div class="flex items-center gap-1.5 flex-wrap">
+      <div class="flex items-center justify-between gap-2 text-xs flex-wrap">
+        <div class="flex items-center gap-2 flex-wrap">
           <!-- Canal con botón directo para ver más de este canal -->
           <button 
             onclick="openChannelDetail('${escapeHtml(podcast.channel)}')" 
-            class="font-semibold text-emerald-400 hover:text-emerald-300 hover:underline flex items-center gap-1 transition-colors"
+            class="font-bold text-emerald-400 hover:text-emerald-300 hover:underline flex items-center gap-1.5 transition-colors text-xs"
             title="Ver más videos de ${escapeHtml(podcast.channel)}"
           >
-            <i data-lucide="tv" class="w-3 h-3"></i>
+            <i data-lucide="tv" class="w-3.5 h-3.5"></i>
             <span>${escapeHtml(podcast.channel)}</span>
           </button>
           
           <span class="text-slate-600">•</span>
           
           <!-- Badge de Duración -->
-          <span class="font-bold text-white bg-slate-800 px-2 py-0.5 rounded border border-slate-700/60 flex items-center gap-1">
-            <i data-lucide="clock" class="w-3 h-3 text-emerald-400"></i>
+          <span class="font-bold text-white bg-slate-800 px-2.5 py-0.5 rounded-md border border-slate-700/80 flex items-center gap-1 text-xs">
+            <i data-lucide="clock" class="w-3.5 h-3.5 text-emerald-400"></i>
             ${podcast.duration}
           </span>
           
           <!-- Categoría -->
-          <span class="px-2 py-0.5 rounded border text-[10px] ${themeBadge}">
+          <span class="px-2.5 py-0.5 rounded-md border text-xs font-medium ${themeBadge}">
             ${escapeHtml(podcast.theme)}
           </span>
         </div>
 
         <!-- Fecha -->
-        <span class="text-[10px] text-slate-500 font-medium">
+        <span class="text-xs text-slate-400 font-medium">
           ${podcast.published_at}
         </span>
       </div>
 
-      <!-- Título Conciso -->
-      <h3 class="text-sm font-bold text-white leading-snug">
+      <!-- Título Conciso y Grande -->
+      <h3 class="text-base sm:text-lg font-bold text-white leading-snug">
         ${escapeHtml(podcast.title)}
       </h3>
 
-      <!-- Resumen Real del Contenido (Qué se habla y conclusiones) -->
-      <p class="text-xs text-slate-300 leading-relaxed bg-slate-950/40 p-2.5 rounded-lg border border-slate-800/50">
+      <!-- Resumen Real del Contenido (Tipografía Mayor y Más Legible) -->
+      <p class="text-sm text-slate-200 leading-relaxed bg-slate-950/60 p-3.5 rounded-xl border border-slate-800/80">
         ${escapeHtml(podcast.summary)}
       </p>
 
       <!-- Fila de Acciones: Link Directo a YouTube + Botón Visto -->
-      <div class="pt-1 flex items-center justify-between gap-2 border-t border-slate-800/60">
+      <div class="pt-1.5 flex items-center justify-between gap-3 border-t border-slate-800/80">
         <a 
           href="${podcast.url}" 
           target="_blank" 
           rel="noopener noreferrer" 
-          class="inline-flex items-center gap-1 text-xs font-semibold text-emerald-400 hover:text-emerald-300 hover:underline py-1"
+          class="inline-flex items-center gap-1.5 text-sm font-bold text-emerald-400 hover:text-emerald-300 hover:underline py-1.5"
         >
           <span>Abrir en YouTube</span>
-          <i data-lucide="external-link" class="w-3.5 h-3.5"></i>
+          <i data-lucide="external-link" class="w-4 h-4"></i>
         </a>
 
         <button 
           onclick="toggleSeen('${podcast.id}', event)" 
-          class="px-2.5 py-1 text-xs rounded-lg border transition-all flex items-center gap-1 ${
+          class="px-3.5 py-1.5 text-xs font-semibold rounded-xl border transition-all flex items-center gap-1.5 ${
             isSeen 
               ? 'bg-slate-800 text-slate-400 border-slate-700 hover:text-white' 
-              : 'bg-slate-800/90 text-slate-200 border-slate-700 hover:bg-slate-700'
+              : 'bg-slate-800/90 text-slate-100 border-slate-700 hover:bg-slate-700'
           }"
         >
-          <i data-lucide="${isSeen ? 'rotate-ccw' : 'check'}" class="w-3.5 h-3.5 ${isSeen ? 'text-slate-400' : 'text-emerald-400'}"></i>
+          <i data-lucide="${isSeen ? 'rotate-ccw' : 'check'}" class="w-4 h-4 ${isSeen ? 'text-slate-400' : 'text-emerald-400'}"></i>
           <span>${isSeen ? 'Desmarcar' : 'Marcar visto'}</span>
         </button>
       </div>
