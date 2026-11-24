@@ -1,0 +1,42 @@
+name: Ciclo Semanal Autónomo Podcast Radar
+
+on:
+  schedule:
+    # Se ejecuta todos los martes a las 07:00 AM UTC (mañanas)
+    - cron: '0 7 * * 2'
+  workflow_dispatch: # Permite ejecución manual desde la pestaña Actions
+
+permissions:
+  contents: write
+  pages: write
+  id-token: write
+
+jobs:
+  weekly-curation:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout del repositorio
+        uses: actions/checkout@v4
+
+      - name: Configurar Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+
+      - name: Ejecutar Ciclo Semanal de Curaduría y Arnés
+        env:
+          GEMINI_API_KEY: ${{ secrets.GEMINI_API_KEY }}
+        run: |
+          python scripts/weekly_scheduler.py
+
+      - name: Subir cambios a la base de datos
+        run: |
+          git config --global user.name "Podcast Radar Bot"
+          git config --global user.email "bot@podcastradar.local"
+          git add data/ public/data/
+          if git diff --staged --quiet; then
+            echo "No hay nuevos episodios para commitear."
+          else
+            git commit -m "chore(radar): actualización semanal automática de podcasts [skip ci]"
+            git push
+          fi
