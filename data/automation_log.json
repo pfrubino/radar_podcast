@@ -1,0 +1,13 @@
+[
+  {
+    "timestamp": "2026-11-24T18:44:08.046832+00:00",
+    "event": "CICLO_SEMANAL",
+    "details": {
+      "status": "FALLO_ARNES",
+      "candidates_discovered": 0,
+      "episodes_added": 0,
+      "duration_seconds": 21.48,
+      "harness_verified": false
+    }
+  }
+]
